@@ -1,6 +1,6 @@
 const app = require('express')()
-const server = require('http').createServer(app)
-const io = require('socket.io').listen(server);
+const server = app.listen(process.env.PORT)
+const io = require('socket.io').listen(server)
 const users = require('./users')()
 
 const message = (name, text, id) => ({name, text, id})
