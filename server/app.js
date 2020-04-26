@@ -18,17 +18,23 @@ io.on('connection', socket => {
             room: data.room
         })
 
-        socket.emit('addMessage', message('Admin', `Добро пожаловать в комнату, ${data.name}`))
+        socket.emit('addMessage', message('admin', `Добро пожаловать в комнату, ${data.name}`))
 
         socket.broadcast
             .to(data.room)
-            .emit('addMessage', message('Admin', `Пользователь ${data.name} зашел в комнату`))
+            .emit('addMessage', message('admin', `Пользователь ${data.name} зашел в комнату`))
     })
 
     socket.on('message', (data, callback) => {
         const user = users.get(data.id)
         io.to(user.room).emit('addMessage', message(data.name, data.text, data.id))
         callback({loaded: true})
+    })
+
+    socket.on('leftUser', (data, callback) => {
+        // const user = users.get(data.id)
+        // io.to(user.room).emit('addMessage', message(data.name, data.text, data.id))
+        // callback({loaded: true})
     })
 
 })
