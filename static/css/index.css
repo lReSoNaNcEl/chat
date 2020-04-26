@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.chat {
+    display: flex;
+    min-height: 100vh;
+}
+
+.chat__users {
+    width: 20%;
+    background-color: #484848;
+}
+
+.chat__dialog {
+    width: 80%;
+}
+
+.dialog__messages {
+
+}
+
+.messages__message {
+    padding: 10px 16px 16px 16px;
+    background-color: #EDEEF0;
+    border-top: 1px solid  #446599;
+}
+
+.message__author {
+    color: #446599;
+    font-weight: 500;
+}
+
+.chat__title {
+    font-size: 36px;
+    font-weight: 500;
+}
+
+.chat__form {
+    display: flex;
+}
+
+.form__field {
+    width: 90%;
+    padding: 10px 0;
+    outline: none;
+    text-indent: 8px;
+}
+
+.form__btn {
+    width: 10%;
+}
+
+.owner {
+    background-color: white;
+    color: black;
+}

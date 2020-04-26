@@ -1,37 +1,42 @@
 <template>
-    <div>
-        <form action="#">
-            <input type="text" v-model="message">
-            <button type="button" @click="toMessage">Отправить сообщение</button>
-        </form>
-    </div>
+    <form action="#">
+        <input v-model="name" type="text" placeholder="Ваше имя">
+        <input v-model="room" type="text" placeholder="Номер комнаты">
+        <button @click="enterToChat" type="button">Войти</button>
+    </form>
 </template>
 
 <script>
-
-
-export default {
-    data() {
-        return {
-            message: ''
-        }
-    },
-    sockets: {
-        connect() {
-            console.log('Client was connected')
-        }
-    },
-    methods: {
-        toMessage() {
-            const payload = {
-                message: this.message,
-                time: new Date().toTimeString().substr(0, 5)
+    export default {
+        head: {
+          title: 'Welcome to Online Chat'
+        },
+        data() {
+            return {
+                name: '',
+                room: ''
             }
+        },
+        sockets: {
+            connect() {
+                console.log('Client was connected')
+            }
+        },
+        methods: {
+            enterToChat() {
+                if (this.name !== '' && this.room !== '') {
+                    const user = {
+                        name: this.name,
+                        room: this.room
+                    }
 
-            this.$socket.emit('message', payload)
-
-            console.log(payload)
+                    this.$socket.emit('joinUser', user, data => {
+                        user.id = data.id
+                        this.$store.commit('saveUser', user)
+                        this.$router.push('/chat')
+                    })
+                }
+            }
         }
     }
-}
 </script>
